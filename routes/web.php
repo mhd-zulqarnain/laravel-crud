@@ -17,31 +17,42 @@ Route::get('/', function () {
 
 Route::get('customer', function () {
 //    $customer   =App\Customer::find(1);
-    $customer   =App\Customer::where('name','=','ali')->first();
+    $customer = App\Customer::where('name', '=', 'ali')->first();
     echo $customer->name;
 });
-Route::get('orders',function (){
-   $orders = App\Order::all();
-   foreach($orders as $order){
+Route::get('orders', function () {
+    $orders = App\Order::all();
+    foreach ($orders as $order) {
 //        $customer= App\Customer::find($order->customer_id);
-        echo "order of ".$order->customer->name." ".$order->name."<br>";
+        echo "order of " . $order->customer->name . " " . $order->name . "<br>";
 
     }
 });
-Route::get('order_by_id/{id}',function ($id){
-    echo "the orders of ".$id."<br>";
+Route::get('order_by_id/{id}', function ($id) {
+    echo "the orders of " . $id . "<br>";
     //echo
 
 });
-Route::get('customer_order/{id}',function ($id){
-    echo "the orders of ".$id."<br>";
+Route::get('customer_order/{id}', function ($id) {
+    echo "the orders of " . $id . "<br>";
     $cus = App\Customer::find($id);
-    $orders= $cus->orders;
+    $orders = $cus->orders;
     echo "<ul>";
-    foreach ($orders as $order){
-        echo "<li>".$order->name."</li>";
+    foreach ($orders as $order) {
+        echo "<li>" . $order->name . "</li>";
     }
-    echo  "</ul>";
+    echo "</ul>";
     //echo
 
 });
+
+Route::get('mypage', function () {
+
+    $orders = App\Order::all();
+    $data = array(
+        "orders" => $orders
+    );
+    return view('myPage', $data);
+
+});
+
