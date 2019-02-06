@@ -33,18 +33,7 @@ Route::get('order_by_id/{id}', function ($id) {
     //echo
 
 });
-Route::get('customer_order/{id}', function ($id) {
-    echo "the orders of " . $id . "<br>";
-    $cus = App\Customer::find($id);
-    $orders = $cus->orders;
-    echo "<ul>";
-    foreach ($orders as $order) {
-        echo "<li>" . $order->name . "</li>";
-    }
-    echo "</ul>";
-    //echo
-
-});
+Route::get('customer_order/{id}', 'CustomerController@customer');
 
 Route::get('mypage', function () {
 
